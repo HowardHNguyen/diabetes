@@ -56,32 +56,31 @@ except Exception as e:
 if 'data' in locals():
     data.fillna(data.mean(), inplace=True)
 
-# Define the feature columns
-feature_columns = ['Glucose', 'BMI', 'Age', 'DiabetesPedigreeFunction',
-                   'BloodPressure', 'Insulin', 'SkinThickness', 'Pregnancies']
+# Define the feature columns in the order expected by the models
+feature_columns = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']
 
 # Sidebar for input parameters
 st.sidebar.header('Enter your parameters')
 
 def user_input_features():
-    Glucose = st.sidebar.slider('Glucose:', 0, 200, 98)
-    BMI = st.sidebar.slider('BMI:', 10, 68, 28)
-    Age = st.sidebar.slider('Age:', 21, 81, 54)
-    DiabetesPedigreeFunction = st.sidebar.slider('Diabetes Pedigree Function:', 0.0, 2.42, 0.47)
-    BloodPressure = st.sidebar.slider('BloodPressure:', 0, 122, 80)
-    Insulin = st.sidebar.slider('Insulin:', 0, 846, 80)
-    SkinThickness = st.sidebar.slider('SkinThickness:', 0, 99, 22)
     Pregnancies = st.sidebar.slider('Pregnancies:', 0, 17, 2)
+    Glucose = st.sidebar.slider('Glucose:', 0, 200, 98)
+    BloodPressure = st.sidebar.slider('BloodPressure:', 0, 122, 80)
+    SkinThickness = st.sidebar.slider('SkinThickness:', 0, 99, 22)
+    Insulin = st.sidebar.slider('Insulin:', 0, 846, 80)
+    BMI = st.sidebar.slider('BMI:', 10, 68, 28)
+    DiabetesPedigreeFunction = st.sidebar.slider('Diabetes Pedigree Function:', 0.0, 2.42, 0.47)
+    Age = st.sidebar.slider('Age:', 21, 81, 54)
 
     data = {
+        'Pregnancies': Pregnancies,
         'Glucose': Glucose,
-        'BMI': BMI,
-        'Age': Age,
-        'DiabetesPedigreeFunction': DiabetesPedigreeFunction,
         'BloodPressure': BloodPressure,
-        'Insulin': Insulin,
         'SkinThickness': SkinThickness,
-        'Pregnancies': Pregnancies
+        'Insulin': Insulin,
+        'BMI': BMI,
+        'DiabetesPedigreeFunction': DiabetesPedigreeFunction,
+        'Age': Age
     }
     features = pd.DataFrame(data, index=[0])
     return features
@@ -96,14 +95,14 @@ input_df.columns = input_df.columns.str.strip()
 
 # Explicitly set data types to match model expectations
 input_df = input_df.astype({
+    'Pregnancies': 'int64',
     'Glucose': 'int64',
-    'BMI': 'int64',
-    'Age': 'int64',
-    'DiabetesPedigreeFunction': 'float64',
     'BloodPressure': 'int64',
-    'Insulin': 'int64',
     'SkinThickness': 'int64',
-    'Pregnancies': 'int64'
+    'Insulin': 'int64',
+    'BMI': 'int64',
+    'DiabetesPedigreeFunction': 'float64',
+    'Age': 'int64'
 })
 
 # Debug: Print feature columns and data types used in the models and in the input dataframe
