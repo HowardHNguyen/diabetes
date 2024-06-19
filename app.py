@@ -112,6 +112,15 @@ st.write("Feature columns used during model training:", feature_columns)
 st.write("Feature columns in input dataframe:", input_df.columns.tolist())
 st.write("Data types of input dataframe:", input_df.dtypes)
 
+# Additional Debug: Check feature names in the models
+try:
+    rf_features = rf_model_calibrated.estimator.feature_names_in_
+    gbm_features = gbm_model_calibrated.estimator.feature_names_in_
+    st.write("Random Forest model feature names:", rf_features)
+    st.write("Gradient Boosting Machine model feature names:", gbm_features)
+except Exception as e:
+    st.error(f"Error retrieving model feature names: {e}")
+
 # Apply the model to make predictions
 if st.sidebar.button('PREDICT NOW'):
     try:
