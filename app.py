@@ -91,10 +91,11 @@ input_df = user_input_features()
 # Ensure input_df columns match the trained model feature columns
 input_df = input_df[feature_columns]
 
-# Debug: Print feature columns used in the models and in the input dataframe
+# Debug: Print feature columns and data types used in the models and in the input dataframe
 st.write("### Debug Info")
 st.write("Feature columns used during model training:", feature_columns)
 st.write("Feature columns in input dataframe:", input_df.columns.tolist())
+st.write("Data types of input dataframe:", input_df.dtypes)
 
 # Apply the model to make predictions
 if st.sidebar.button('PREDICT NOW'):
