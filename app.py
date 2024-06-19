@@ -18,8 +18,8 @@ def download_file(url, dest):
         return False
 
 # URLs for the model files
-rf_model_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/main/rf_model_calibrated.pkl'
-gbm_model_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/main/gbm_model_calibrated.pkl'
+rf_model_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/rf_model_calibrated.pkl'
+gbm_model_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/gbm_model_calibrated.pkl'
 
 # Local paths for the model files
 rf_model_path = 'rf_model_calibrated.pkl'
@@ -42,7 +42,7 @@ except Exception as e:
     st.error(f"Error loading models: {e}")
 
 # Load the dataset
-data_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/main/diabetes_01.csv'
+data_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/diabetes_01.csv'
 try:
     data = pd.read_csv(data_url)
 except Exception as e:
