@@ -144,4 +144,36 @@ if st.sidebar.button('PREDICT NOW'):
         pass
 
     # Plot feature importances for Random Forest
-    st.subheader('F
+    st.subheader('Feature Importances (Random Forest)')
+    try:
+        rf_base_model = rf_model_calibrated.estimator  # Access the base estimator
+        fig, ax = plt.subplots()
+        importances = rf_base_model.feature_importances_
+        indices = np.argsort(importances)
+        ax.barh(range(len(indices)), importances[indices], color='blue', align='center')
+        ax.set_yticks(range(len(indices)))
+        ax.set_yticklabels([feature_columns[i] for i in indices])
+        ax.set_xlabel('Importance')
+        st.pyplot(fig)
+    except Exception as e:
+        st.error(f"Error plotting feature importances: {e}")
+
+    # Plot ROC curve for both models
+    st.subheader('Model Performance')
+    try:
+        fpr_rf, tpr_rf, _ = roc_curve(data['Outcome'], rf_model_calibrated.predict_proba(data[feature_columns])[:, 1])
+        fpr_gbm, tpr_gbm, _ = roc_curve(data['Outcome'], gbm_model_calibrated.predict_proba(data[feature_columns])[:, 1])
+        fig, ax = plt.subplots()
+        ax.plot(fpr_rf, tpr_rf, label=f'Random Forest (AUC = {roc_auc_score(data["Outcome"], rf_model_calibrated.predict_proba(data[feature_columns])[:, 1]):.2f})')
+        ax.plot(fpr_gbm, tpr_gbm, label=f'Gradient Boosting Machine (AUC = {roc_auc_score(data["Outcome"], gbm_model_calibrated.predict_proba(data[feature_columns])[:, 1]):.2f})')
+        ax.plot([0, 1], [0, 1], 'k--')
+        ax.set_xlabel('False Positive Rate')
+        ax.set_ylabel('True Positive Rate')
+        ax.set_title('ROC Curve')
+        ax.legend(loc='best')
+        st.pyplot(fig)
+    except Exception as e:
+        st.error(f"Error plotting ROC curve: {e}")
+else:
+    st.write("## Diabetes Disease Prediction App")
+    st.write("### Enter your parameters and click Predict to get the results.")
