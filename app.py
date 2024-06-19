@@ -20,10 +20,12 @@ def download_file(url, dest):
 # URLs for the model files
 rf_model_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/rf_model_calibrated.pkl'
 gbm_model_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/gbm_model_calibrated.pkl'
+data_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/diabetes_01.csv'  # Ensure this URL is correct
 
 # Local paths for the model files
 rf_model_path = 'rf_model_calibrated.pkl'
 gbm_model_path = 'gbm_model_calibrated.pkl'
+data_path = 'diabetes_01.csv'
 
 # Download the models if not already present
 if not os.path.exists(rf_model_path):
@@ -42,9 +44,11 @@ except Exception as e:
     st.error(f"Error loading models: {e}")
 
 # Load the dataset
-data_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/diabetes_01.csv'
+if not os.path.exists(data_path):
+    download_file(data_url, data_path)
+
 try:
-    data = pd.read_csv(data_url)
+    data = pd.read_csv(data_path)
 except Exception as e:
     st.error(f"Error loading data: {e}")
 
@@ -83,6 +87,9 @@ def user_input_features():
     return features
 
 input_df = user_input_features()
+
+# Ensure input_df columns match the trained model feature columns
+input_df = input_df[feature_columns]
 
 # Apply the model to make predictions
 if st.sidebar.button('PREDICT NOW'):
