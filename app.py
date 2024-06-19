@@ -20,7 +20,7 @@ def download_file(url, dest):
 # URLs for the model files
 rf_model_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/rf_model_calibrated.pkl'
 gbm_model_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/gbm_model_calibrated.pkl'
-data_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/diabetes_01.csv' 
+data_url = 'https://raw.githubusercontent.com/HowardHNguyen/diabetes/master/diabetes_01.csv'
 
 # Local paths for the model files
 rf_model_path = 'rf_model_calibrated.pkl'
