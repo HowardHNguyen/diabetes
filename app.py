@@ -33,7 +33,7 @@ if not os.path.exists(rf_model_path):
     download_file(rf_model_url, rf_model_path)
 
 if not os.path.exists(gbm_model_path):
-    st.info(f"Downloading {gbm_model_path}...)
+    st.info(f"Downloading {gbm_model_path}...")
     download_file(gbm_model_url, gbm_model_path)
 
 # Load the calibrated models
