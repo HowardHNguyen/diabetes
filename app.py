@@ -143,9 +143,9 @@ if st.sidebar.button('PREDICT NOW'):
     # Plot ROC curve for both models
     st.subheader('Model Performance')
     try:
-        fig, ax = plt.subplots()
         fpr_rf, tpr_rf, _ = roc_curve(data['Outcome'], rf_model_calibrated.predict_proba(data[feature_columns])[:, 1])
         fpr_gbm, tpr_gbm, _ = roc_curve(data['Outcome'], gbm_model_calibrated.predict_proba(data[feature_columns])[:, 1])
+        fig, ax = plt.subplots()
         ax.plot(fpr_rf, tpr_rf, label=f'Random Forest (AUC = {roc_auc_score(data["Outcome"], rf_model_calibrated.predict_proba(data[feature_columns])[:, 1]):.2f})')
         ax.plot(fpr_gbm, tpr_gbm, label=f'Gradient Boosting Machine (AUC = {roc_auc_score(data["Outcome"], gbm_model_calibrated.predict_proba(data[feature_columns])[:, 1]):.2f})')
         ax.plot([0, 1], [0, 1], 'k--')
