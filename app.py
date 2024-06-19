@@ -53,8 +53,8 @@ if 'data' in locals():
     data.fillna(data.mean(), inplace=True)
 
 # Define the feature columns
-feature_columns = ['Glucose','BMI','Age','DiabetesPedigreeFunction',
-                   'BloodPressure','Insulin','SkinThickness','Pregnancies']
+feature_columns = ['Glucose', 'BMI', 'Age', 'DiabetesPedigreeFunction',
+                   'BloodPressure', 'Insulin', 'SkinThickness', 'Pregnancies']
 
 # Sidebar for input parameters
 st.sidebar.header('Enter your parameters')
@@ -63,11 +63,11 @@ def user_input_features():
     Glucose = st.sidebar.slider('Glucose:', 0, 200, 98)
     BMI = st.sidebar.slider('BMI:', 10, 68, 28)
     Age = st.sidebar.slider('Age:', 21, 81, 54)
-    DiabetesPedigreeFunction = st.sidebar.slider('Diabetes Pedigree Function:', 0, 2.42, 0.47)
+    DiabetesPedigreeFunction = st.sidebar.slider('Diabetes Pedigree Function:', 0.0, 2.42, 0.47)
     BloodPressure = st.sidebar.slider('BloodPressure:', 0, 122, 80)
-    Insulin = st.sidebar.selectbox('Insulin:', 0, 846, 80)
+    Insulin = st.sidebar.slider('Insulin:', 0, 846, 80)
     SkinThickness = st.sidebar.slider('SkinThickness:', 0, 99, 22)
-    Pregnancies = st.sidebar.selectbox('Pregnancies:', 0, 17, 2)
+    Pregnancies = st.sidebar.slider('Pregnancies:', 0, 17, 2)
 
     data = {
         'Glucose': Glucose,
@@ -99,8 +99,8 @@ if st.sidebar.button('PREDICT NOW'):
 
     st.subheader('Predictions')
     try:
-        st.write(f"- Random Forest model: Your diabetes with probability prediction is {rf_proba_calibrated[0]:.2f}")
-        st.write(f"- Gradient Boosting Machine model: Your diabetes with probability prediction is {gbm_proba_calibrated[0]:.2f}")
+        st.write(f"- Random Forest model: Your diabetes probability prediction is {rf_proba_calibrated[0]:.2f}")
+        st.write(f"- Gradient Boosting Machine model: Your diabetes probability prediction is {gbm_proba_calibrated[0]:.2f}")
     except:
         pass
 
