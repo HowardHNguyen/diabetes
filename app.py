@@ -112,8 +112,8 @@ st.write("Data types of input dataframe:", input_df.dtypes)
 # Apply the model to make predictions
 if st.sidebar.button('PREDICT NOW'):
     try:
-        rf_proba_calibrated = rf_model_calibrated.predict_proba(input_df)[:, 1]
-        gbm_proba_calibrated = gbm_model_calibrated.predict_proba(input_df)[:, 1]
+        rf_proba_calibrated = rf_model_calibrated.predict_proba(input_df[feature_columns])[:, 1]
+        gbm_proba_calibrated = gbm_model_calibrated.predict_proba(input_df[feature_columns])[:, 1]
     except Exception as e:
         st.error(f"Error making predictions: {e}")
 
