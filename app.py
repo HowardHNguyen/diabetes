@@ -140,7 +140,7 @@ if st.sidebar.button('PREDICT NOW'):
         pass
 
     # Plot feature importances for Random Forest
-    st.subheader('Feature Importances (Random Forest)')
+    st.subheader('Risk Factors / Feature Importances (RF)')
     try:
         rf_base_model = rf_model_calibrated.estimator  # Access the base estimator
         fig, ax = plt.subplots()
