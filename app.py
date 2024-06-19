@@ -33,7 +33,7 @@ if not os.path.exists(rf_model_path):
     download_file(rf_model_url, rf_model_path)
 
 if not os.path.exists(gbm_model_path):
-    st.info(f"Downloading {gbm_model_path}...")
+    st.info(f"Downloading {gbm_model_path}...)
     download_file(gbm_model_url, gbm_model_path)
 
 # Load the calibrated models
@@ -90,6 +90,9 @@ input_df = user_input_features()
 
 # Ensure input_df columns match the trained model feature columns
 input_df = input_df[feature_columns]
+
+# Clean feature names to ensure no hidden characters or spaces
+input_df.columns = input_df.columns.str.strip()
 
 # Explicitly set data types to match model expectations
 input_df = input_df.astype({
